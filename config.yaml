@@ -1,0 +1,38 @@
+model:
+  name: "unsloth/Qwen2.5-Coder-3B-Instruct-bnb-4bit"
+  max_seq_length: 2048
+  load_in_4bit: true
+
+lora:
+  r: 16
+  lora_alpha: 16
+  lora_dropout: 0
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+dataset:
+  train_file: "data/opengl_qa.jsonl"
+  system_prompt: "You are an expert modern OpenGL (3.3+ / 4.6) and C++ graphics programmer. Provide clean, memory-safe code."
+
+training:
+  output_dir: "outputs/qwen-opengl-3b"
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  num_train_epochs: 3
+  learning_rate: 0.0002
+  warmup_steps: 10
+  lr_scheduler_type: "cosine"
+  optim: "adamw_8bit"
+  logging_steps: 5
+  save_strategy: "epoch"
+
+export:
+  save_gguf: true
+  gguf_dir: "exports/qwen-opengl-gguf"
+  quantization_method: "q4_k_m"
