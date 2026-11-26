@@ -18,7 +18,7 @@ lora:
 
 dataset:
   train_file: "data/opengl_qa.jsonl"
-  system_prompt: "You are an expert modern OpenGL (3.3+ / 4.6) and C++ graphics programmer. Provide clean, memory-safe code."
+  system_prompt: "You are an expert modern OpenGL (3.3+ / 4.6) and C++ graphics programmer. Provide clean, memory-safe code that can be scaled and maintained at large."
 
 training:
   output_dir: "outputs/qwen-opengl-3b"
